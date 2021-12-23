@@ -1,0 +1,170 @@
+*,
+*::after,
+*::before {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+html {
+  font-family: "Mulish", sans-serif;
+  font-size: 62.5%;
+}
+:root {
+  --myfont: "Mulish", sans-serif;
+  --my-btn-font: "Montserrat", sans-serif;
+  --lg-lightcolor: linear-gradient(
+    to left,
+    rgba(116, 235, 213, 0.5),
+    rgba(159, 172, 230, 0.2)
+  );
+  --lg-color: linear-gradient(to left, #74ebd5, #9face6);
+}
+.main_div {
+  width: 100vw;
+  height: 100vh;
+  background: var(--lg-lightcolor);
+  display: grid;
+  place-items: center;
+}
+.center_div {
+  width: 38rem;
+  height: 55rem;
+  max-width: 100%;
+  background: linear-gradient(
+    to right,
+    rgba(241, 171, 171, 0.8),
+    rgba(241, 171, 171, 0.4)
+  );
+  border-radius: 1.6rem;
+  overflow: hidden;
+  box-shadow: 0 1.4rem 2.8rem rgba(0, 0, 0, 0.25),
+    0 1rem 1rem rgba(0, 0, 0, 0.22);
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+}
+h2#title {
+  font-size: 2.5rem;
+  text-transform: uppercase;
+  letter-spacing: 0.2rem;
+  margin: 1.6rem;
+  margin-top: 4rem;
+  text-shadow: 0 1.4rem 2.8rem rgba(0, 0, 0, 0.25),
+    0 1rem 1rem rgba(0, 0, 0, 0.22);
+}
+h3#artist {
+  font-size: 1.5rem;
+  margin: 1.6rem;
+  margin-top: 1rem;
+  margin-bottom: 4rem;
+  opacity: 0.7;
+  text-shadow: 0 1.4rem 2.8rem rgba(0, 0, 0, 0.25),
+    0 1rem 1rem rgba(0, 0, 0, 0.22);
+}
+figure {
+  width: 27rem;
+  height: 27rem;
+  box-shadow: 0 1.4rem 3.8rem rgba(0, 0, 0, 0.25),
+    0 1rem 1rem rgba(0, 0, 0, 0.22);
+  border-radius: 50%;
+  margin-bottom: 3rem;
+}
+img {
+  width: 100%;
+  height: 100%;
+  border-radius: 50%;
+  object-fit: cover;
+}
+.progressbar_container {
+  width: 90%;
+  height: 3rem;
+  position: relative;
+}
+.progressDuration {
+  width: 93%;
+  height: 1.2rem;
+  display: flex;
+  justify-content: space-between;
+  margin: 0 auto;
+  font-size: 1.1rem;
+  font-weight: 400;
+  margin-top: 0.1rem;
+  margin-bottom: 0;
+}
+.progressbar {
+  position: absolute;
+  width: 95%;
+  height: 0.8rem;
+  margin-top: 0;
+  transform: translate(2.5%, 50%);
+  border-radius: 1rem;
+  background: rgb(165, 160, 160);
+  box-shadow: 0 1.4rem 2.8rem rgba(0, 0, 0, 0.25),
+    0 1rem 1rem rgba(0, 0, 0, 0.22);
+  cursor: pointer;
+}
+.progress {
+  height: 100%;
+  width: 0;
+  border-radius: 1rem;
+  transition: width 0.3s linear;
+  background: rgb(138, 213, 223);
+}
+.contols {
+  display: flex;
+  justify-content: space-evenly;
+  align-items: center;
+  width: 80%;
+  height: 5.5rem;
+}
+.fas {
+  filter: drop-shadow(0 1.5rem 3rem 0.5rem rgba(0, 0, 0, 0.4));
+}
+.contols .fas:hover {
+  color: rgb(139, 136, 136);
+}
+.contols .fas.fa-play:hover {
+  color: rgb(20, 19, 19);
+  background: white;
+}
+.fas {
+  cursor: pointer;
+}
+.fas.fa-play {
+  width: 3.5rem;
+  height: 3.5rem;
+  border-radius: 50%;
+  background: #000;
+  color: #fff;
+  display: grid;
+  place-items: center;
+}
+.fas.fa-pause {
+  width: 3.5rem;
+  height: 3.5rem;
+  border-radius: 50%;
+  background: #000;
+  color: #fff;
+  display: grid;
+  place-items: center;
+}
+.contols .fas.fa-pause:hover {
+  color: rgb(20, 19, 19);
+  background: white;
+}
+.fas.fa-forward,
+.fas.fa-backward {
+  width: 3rem;
+  text-align: center;
+}
+.anime {
+  animation: rotate 4s linear infinite;
+}
+@keyframes rotate {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}

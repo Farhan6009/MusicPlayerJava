@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.0/css/all.min.css"
+    />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Mulish:wght@500&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="./test.css" />
+    <title>Document</title>
+  </head>
+  <body>
+    <div class="main_div">
+      <div class="center_div">
+        <h2 id="title">kurbaan</h2>
+        <h3 id="artist">Atif Aslam</h3>
+        <figure>
+          <img src="./images/pexels-photo-373893.jpeg" alt="" />
+        </figure>
+        <audio src="./audio/kurbaan01(www.songs.pk).mp3"></audio>
+        <div class="progressbar_container" id="progressbar_container">
+          <div class="progressDuration">
+            <div id="current_time">0:00</div>
+            <div id="total_time">2:44</div>
+          </div>
+          <div class="progressbar" id="progressbar">
+            <div class="progress" id="progress"></div>
+          </div>
+        </div>
+        <div class="contols">
+          <i class="fas fa-2x fa-backward" id="prev" title="prev"></i>
+          <i class="fas fa-play" id="play" title="play"></i>
+          <i class="fas fa-2x fa-forward" id="next" title="next"></i>
+        </div>
+      </div>
+    </div>
+    <script>
+      const music = document.querySelector("audio");
+      const img = document.querySelector("img");
+      const play = document.getElementById("play");
+      const prev = document.getElementById("prev");
+      const next = document.getElementById("next");
+      const title = document.getElementById("title");
+      const artist = document.getElementById("artist");
+      const current_time = document.getElementById("current_time");
+      const total_time = document.getElementById("total_time");
+      const progress = document.getElementById("progress");
+      const progressbar = document.getElementById("progressbar");
+
+      const song = [
+        {
+          title: "kurbaan",
+          artist: "Atif Aslam",
+          music: "./audio/kurbaan01(www.songs.pk).mp3",
+          img: "./images/pexels-photo-373893.jpeg",
+        },
+        {
+          title: "Tum Pass ",
+          artist: "Arijit Singh",
+          music: "./audio/mynameiskhan07(www.songs.pk).mp3",
+          img: "./images/31-311843_clash-of-clans-barbarian-png.jpg",
+        },
+        {
+          title: "Laung Da ",
+          artist: "Benny Dayal",
+          music: "./audio/patialahouse01(www.songs.pk).mp3",
+          img: "./images/photo-1504909177259-7a4a3d7e969e.jpg",
+        },
+      ];
+      let isPlaying = false;
+
+      const playMusic = () => {
+        isPlaying = true;
+        music.play();
+        play.classList.replace("fa-play", "fa-pause");
+        img.classList.add("anime");
+      };
+      const pauseMusic = () => {
+        isPlaying = false;
+        music.pause();
+        play.classList.replace("fa-pause", "fa-play");
+        img.classList.remove("anime");
+      };
+
+      play.addEventListener("click", () => {
+        isPlaying ? pauseMusic() : playMusic();
+      });
+
+      const loadSongs = (song) => {
+        title.textContent = song.title;
+        artist.textContent = song.artist;
+        music.src = song.music;
+        img.src = song.img;
+      };
+
+      let songIndex = 0;
+      const nextSong = () => {
+        songIndex = (songIndex + 1) % song.length;
+        loadSongs(song[songIndex]);
+        playMusic();
+      };
+      const prevSong = () => {
+        songIndex = (songIndex - 1 + song.length) % song.length;
+        loadSongs(song[songIndex]);
+        playMusic();
+      };
+
+      music.addEventListener("timeupdate", (event) => {
+        const { currentTime, duration } = event.srcElement;
+
+        let progresstime = (currentTime / duration) * 100;
+        progress.style.width = `${progresstime}%`;
+
+        let curtimemin = parseInt(currentTime / 60);
+        let curtimesec = parseInt(currentTime % 60);
+        if (curtimesec < 10) {
+          curtimesec = `0${curtimesec}`;
+        }
+        current_time.textContent = `${curtimemin}:${curtimesec}`;
+
+        if (currentTime === duration) {
+          play.classList.replace("fa-pause", "fa-play");
+          img.classList.remove("anime");
+        }
+        let timemin = parseInt(duration / 60);
+        let timesec = parseInt(duration % 60);
+        total_time.textContent = `${timemin}:${timesec}`;
+      });
+      progressbar.addEventListener("click", (event) => {
+        const { duration } = music;
+        let moveprogress =
+          (event.offsetX / event.srcElement.clientWidth) * duration;
+        music.currentTime = moveprogress;
+      });
+      music.addEventListener("ended", nextSong);
+      next.addEventListener("click", nextSong);
+      prev.addEventListener("click", prevSong);
+    </script>
+  </body>
+</html>
